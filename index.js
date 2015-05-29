@@ -11,17 +11,23 @@ module.exports = function(source) {
   if (params.precompile == 'false') {
     params.precompile = false;
   }
+  if (params.es6module) {
+    params.es6module = true;
+  }
 
   var whitelist = {
     harmony: true,
-    precompile: true
+    precompile: true,
+    es6module: true
   };
 
   var unknownParams = [];
+  
   for (var i in params) {
     if (!whitelist[i])
       unknownParams.push(i);
   }
+
   if (unknownParams.length) {
     var warn = unknownParams.length === 1 ?
       'msx-loader got this undocumented option: ' :
